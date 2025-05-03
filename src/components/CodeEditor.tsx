@@ -10,9 +10,10 @@ import { LANGUAGE_TEMPLATES } from '../constants';
 interface CodeEditorProps {
   editorRef: React.RefObject<any>;
   roomName?: string;
+  provider: WebsocketProvider;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ editorRef, roomName }) => {
+const CodeEditor: React.FC<CodeEditorProps> = ({ editorRef, roomName, provider }) => {
   const [language, setLanguage] = useState("python");
   const [value, setValue] = useState(LANGUAGE_TEMPLATES["python"]);
 
@@ -34,13 +35,12 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ editorRef, roomName }) => {
 
   const handleMount = (editor: any, monaco: any) => {
     editorRef.current = editor;
-
-    const ydoc = new Y.Doc();
-    const currentRoomName = roomName || "default-room";
-    const provider = new WebrtcProvider("new-room", ydoc);
-    const type = ydoc.getText("monaco");
-
-    new MonacoBinding(type, editor.getModel(), new Set([editor]), provider.awareness);
+    const ydoc = provider.doc;
+  
+    if (ydoc && provider) {
+      const type = ydoc.getText("monaco");
+      new MonacoBinding(type, editor.getModel(), new Set([editor]), provider.awareness);
+    }
   };
 
   const handleLanguageChange = (newLanguage: string) => {

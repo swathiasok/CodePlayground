@@ -11,10 +11,12 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.0.4",
+    "@y/websocket-server": "^0.1.1",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.3",
     "level": "^10.0.0",
     "monaco-editor": "^0.52.2",
+    "node-static": "^0.7.11",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.1.0",
@@ -29,6 +31,7 @@
     "y-redis": "^1.0.3",
     "y-webrtc": "^10.3.0",
     "y-websocket": "^3.0.0",
+    "y-websockets-server": "^9.2.1",
     "yjs": "^13.6.26"
   },
   "scripts": {
