@@ -1,0 +1,25 @@
+body {
+    background-color: #fff !important;
+    color: #1d1c1c !important;
+}
+
+.dark-mode {
+    background-color: #1d1c1c !important;
+    color: #fff !important;
+}
+
+.app {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10px;
+    height: 400px;
+}
+
+.app-section {
+    background-color: #575757;
+    flex: 1;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid black;
+}

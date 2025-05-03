@@ -1,15 +1,15 @@
-export const LANGUAGES: { [languageId: string]: string } = {
-    "python": "3.10",
-    "javascript": "ES2021",
-    "typescript": "4.9.5",
-    "cpp": "17",
-    "java": "17",
-    "csharp": "10.0",
-    "go": "1.20",
-    "php": "8.2",
-    "ruby": "3.2.2",
-    "rust": "1.70.0"
-  };
+export const LANGUAGES: string[] = [
+    "python",
+    "javascript",
+    "typescript",
+    "cpp",
+    "java",
+    "csharp",
+    "go",
+    "php",
+    "ruby",
+    "rust",
+];
 
   export const LANGUAGE_TEMPLATES: { [lang: string]: string } = {
     "python": `# Python 3.8.1

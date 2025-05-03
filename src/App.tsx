@@ -1,38 +1,82 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import CodeEditor from './components/CodeEditor';
-import FileExplorer from './components/FileExplorer';
-import Collaborator from './components/Collaborator';
-import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Form
+} from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useRoomContext } from './context/RoomContext';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [isNewRoom, setIsNewRoom] = useState(true);
+  const [roomName, setRoomName] = useState('');
+  const [name, setName] = useState('');
+  const navigate = useNavigate();
+  const { addUserToRoom } = useRoomContext();
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const room = isNewRoom ? Math.floor(10000 + Math.random() * 90000).toString() : roomName;
+    addUserToRoom(room, name);
+  
+    navigate('/home', { state: { room } });
+  };
 
   return (
-  <div className={`container-fluid p-3 ${darkMode ? "dark-mode" : ""}`}>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1 className="flex-grow-1 text-center m-0">Code Editor</h1>
-        <button
-          className="btn btn-outline-primary"
-          onClick={() => setDarkMode(!darkMode)}
+    <Container fluid className="dark-mode">
+      <Row>
+        {/* Left */}
+        <Col md={6} className="p-0">
+          <img
+            src="/images/home.png"
+            alt="Logo"
+            style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
+          />
+        </Col>
+
+        {/* Right */}
+        <Col
+          md={6}
+          className="d-flex flex-column justify-content-center align-items-center"
+          style={{ height: '100vh', padding: '2rem' }}
         >
-          {darkMode ? "Light Mode" : "Dark Mode"}
-        </button>
-      </div>
+          <Form style={{ width: '100%', maxWidth: '400px' }}>
+            <Form.Group className="mb-3" controlId="formToggle">
+              <Form.Check
+                type="switch"
+                label={isNewRoom ? "Creating New Room" : "Joining Existing Room"}
+                checked={isNewRoom}
+                onChange={() => setIsNewRoom(!isNewRoom)}
+              />
+            </Form.Group>
 
-      {/* Main Layout - Three Sections */}
-      <div className="row">
-        {/* File Explorer */}
-        <FileExplorer />
+            <Form.Group className="mb-3" controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter your name" onChange={(e) => setName(e.target.value)} required/>
+            </Form.Group>
 
-        {/* Code Editor */}
-        <CodeEditor />
+            {!isNewRoom && (
+              <Form.Group className="mb-3" controlId="formRoom">
+                <Form.Label>Room Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter room name"
+                  onChange={(e) => setRoomName(e.target.value)}
+                  required
+                />
+              </Form.Group>
+            )}
 
-        {/* Collaborators */}
-        <Collaborator />
-      </div>
-
-    </div>
+            <Button variant="primary" type="submit" className="w-100" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

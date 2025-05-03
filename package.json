@@ -9,20 +9,26 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
-    "@types/react": "^19.0.10",
+    "@types/react": "^19.1.2",
     "@types/react-dom": "^19.0.4",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.3",
-    "react": "^19.0.0",
+    "level": "^10.0.0",
+    "monaco-editor": "^0.52.2",
+    "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.3.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.5.3",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
+    "redis": "^5.0.0",
     "web-vitals": "^2.1.4",
+    "ws": "^8.18.2",
+    "y-leveldb": "^0.2.0",
     "y-monaco": "^0.1.6",
+    "y-redis": "^1.0.3",
     "y-webrtc": "^10.3.0",
+    "y-websocket": "^3.0.0",
     "yjs": "^13.6.26"
   },
   "scripts": {
@@ -48,5 +54,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/ws": "^8.18.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
