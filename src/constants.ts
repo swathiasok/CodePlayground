@@ -2,7 +2,7 @@ export const LANGUAGES: string[] = [
     "python",
     "javascript",
     "typescript",
-    "cpp",
+    "c",
     "java",
     "csharp",
     "go",
@@ -11,17 +11,17 @@ export const LANGUAGES: string[] = [
     "rust",
 ];
 
-  export const LANGUAGE_TEMPLATES: { [lang: string]: string } = {
-    "python": `# Python 3.8.1
-  def main():
-      print("Hello, World!")
-  
-  if __name__ == "__main__":
-      main()`,
+export const LANGUAGE_TEMPLATES: { [lang: string]: string } = {
+  "python": `# Python 3.8.1
+def main():
+  print("Hello, World!")
+    
+if __name__ == "__main__":
+  main()`,
     
     "javascript": `// JavaScript (ES2021)
   function greet() {
-      console.log("Hello, World!");
+    console.log("Hello, World!");
   }
   greet();`,
   
@@ -31,10 +31,11 @@ export const LANGUAGES: string[] = [
   }
   greet("World");`,
   
-    "cpp": `// C++17
-  #include <iostream>
+  "c": `// C
+  #include <stdio.h>
+
   int main() {
-      std::cout << "Hello, World!" << std::endl;
+      printf("Hello, World!\\n");
       return 0;
   }`,
   
@@ -72,4 +73,4 @@ export const LANGUAGES: string[] = [
   fn main() {
       println!("Hello, World!");
   }`
-  };
+};

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ListGroup, Collapse, Button } from 'react-bootstrap';
+import { ListGroup, Collapse} from 'react-bootstrap';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 // const collaborators = ['Alice', 'Bob', 'Charlie'];
@@ -9,29 +9,28 @@ interface CollaboratorProps {
 }
 
 const CollaboratorList: React.FC<CollaboratorProps> = ({collaborators}) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
-    <ListGroup className="mb-3">
-      <ListGroup.Item
-        action
-        onClick={() => setOpen(!open)}
-        className="d-flex justify-content-between align-items-center"
-        style={{ cursor: 'pointer' }}
-      >
-        <strong>Collaborators</strong>
-        {open ? <FaChevronUp /> : <FaChevronDown />}
-      </ListGroup.Item>
+    <ListGroup className="mb-3 custom-panel">
+        <ListGroup.Item
+            action
+            onClick={() => setOpen(!open)}
+            className="d-flex justify-content-between align-items-center custom-panel"
+            style={{ cursor: 'pointer' }}
+        >Collaborators
+            {open ? <FaChevronUp /> : <FaChevronDown />}
+        </ListGroup.Item>
 
-      <Collapse in={open}>
-        <div>
-          {collaborators.map((name, idx) => (
-            <ListGroup.Item key={idx} style={{ background: "#f8f9fa" }}>
-              {name}
-            </ListGroup.Item>
-          ))}
-        </div>
-      </Collapse>
+        <Collapse in={open}>
+            <div>
+            {collaborators.map((name, idx) => (
+                <ListGroup.Item key={idx}>
+                {name}
+                </ListGroup.Item>
+            ))}
+            </div>
+        </Collapse>
     </ListGroup>
   );
 };

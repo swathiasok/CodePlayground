@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import Editor, { loader } from "@monaco-editor/react";
-import * as Y from "yjs";
 import { WebsocketProvider } from 'y-websocket';
 import { MonacoBinding } from "y-monaco";
-import { WebrtcProvider } from 'y-webrtc';
 import LanguageSelector from './LanguageSelector';
 import { LANGUAGE_TEMPLATES } from '../constants';
 
 interface CodeEditorProps {
+  darkMode: boolean;
   editorRef: React.RefObject<any>;
   roomName?: string;
   provider: WebsocketProvider;
+  setOutput: (output: string) => void;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ editorRef, roomName, provider }) => {
+const CodeEditor: React.FC<CodeEditorProps> = ({ darkMode, editorRef, roomName, provider, setOutput }) => {
   const [language, setLanguage] = useState("python");
   const [value, setValue] = useState(LANGUAGE_TEMPLATES["python"]);
 
   useEffect(() => {
     loader.init().then(monaco => {
-      monaco.editor.defineTheme("customTheme", {
+      monaco.editor.defineTheme("customDarkTheme", {
         base: "vs",
         inherit: true,
         rules: [],
@@ -28,6 +28,19 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ editorRef, roomName, provider }
           "editor.lineHighlightBackground": "#0000FF20",
           "editorLineNumber.foreground": "#008800",
           "editorCursor.foreground": "#FF0000",
+        }
+      });
+
+      monaco.editor.defineTheme("customLightTheme", {
+        base: "vs",
+        inherit: true,
+        rules: [],
+        colors: {
+          "editor.background": "#ffffff",
+          "editor.lineHighlightBackground": "#f0f0f0",
+          "editorLineNumber.foreground": "#888888",
+          "editorCursor.foreground": "#000000",
+          "editor.foreground": "#000000",
         }
       });
     });
@@ -51,13 +64,13 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ editorRef, roomName, provider }
   return (
     <div>
       <div className="card shadow-sm">
-        <LanguageSelector language={language} onSelect={handleLanguageChange} />
-        <div className="card-body">
+        <LanguageSelector editorRef={editorRef} language={language} onSelect={handleLanguageChange} setOutput={setOutput} />
+        <div className="card-body custom-panel">
           <Editor
             height="70vh"
             language={language}
             value={value}
-            theme="customTheme"
+            theme={darkMode ? "customDarkTheme" : "customLightTheme"}
             onMount={handleMount}
             onChange={(val) => setValue(val || "")}
           />
