@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Editor, { loader } from "@monaco-editor/react";
-import { WebsocketProvider } from 'y-websocket';
+import { WebrtcProvider } from 'y-webrtc';
 import { MonacoBinding } from "y-monaco";
 import LanguageSelector from './LanguageSelector';
 import { LANGUAGE_TEMPLATES } from '../constants';
@@ -9,7 +9,7 @@ interface CodeEditorProps {
   darkMode: boolean;
   editorRef: React.RefObject<any>;
   roomName?: string;
-  provider: WebsocketProvider;
+  provider: WebrtcProvider;
   setOutput: (output: string) => void;
 }
 
