@@ -32,8 +32,8 @@ function App() {
         {/* Left */}
         <Col md={6} className="p-0 d-none d-md-block">
           <img
-            src="/images/home.png"
-            alt="Logo"
+            src={`${process.env.PUBLIC_URL}/images/home.png`} 
+            alt="Logo" 
             style={{ width: '100%', height: '100vh', objectFit: 'cover' }}
           />
         </Col>
