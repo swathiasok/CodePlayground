@@ -19,7 +19,7 @@ function Home() {
     const editorRef = useRef(null);
     const [isConnected, setIsConnected] = useState(false);
     const { state } = useLocation();
-    const { room, name } = state;
+    const { room = "default-room", name } = state;
     const roomName = room;
     const providerRef = useRef<WebrtcProvider | null>(null);
     const ydoc = useRef(new Y.Doc()).current;

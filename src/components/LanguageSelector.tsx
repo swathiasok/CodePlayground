@@ -10,9 +10,10 @@ interface LanguageSelectorProps {
     language: string;
     onSelect: (lang: string) => void;
     setOutput: (output: string) => void;
+    updateSharedOutput: (output: string) => void;
 }
 
-const LanguageSelector: React.FC<LanguageSelectorProps> = ({ editorRef, language, onSelect, setOutput }) => {
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ editorRef, language, onSelect, setOutput, updateSharedOutput }) => {
     const [languages, setLanguages] = React.useState<{ [key: string]: string }>({});
 
     React.useEffect(() => {
@@ -49,6 +50,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ editorRef, language
             console.log("Code execution result:", result);
             
             setOutput(result.output);
+            updateSharedOutput(result.output);
         }
         catch (error) {
             console.error("Error executing code:", error);

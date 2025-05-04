@@ -46,6 +46,50 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ darkMode, editorRef, roomName, 
     });
   }, []);
 
+  useEffect(() => {
+    if (!provider) return;
+
+    const ydoc = provider.doc;
+    const yLanguage = ydoc.getMap('language');
+    
+    if (yLanguage.size === 0) {
+      yLanguage.set('current', language);
+    } else {
+      // Otherwise use the shared language
+      setLanguage(yLanguage.get('current') as string);
+      setValue(LANGUAGE_TEMPLATES[yLanguage.get('current') as string] || '');
+    }
+
+    // Set up output syncing
+    const yOutput = ydoc.getMap('output');
+    if (yOutput.has('current')) {
+      setOutput(yOutput.get('current') as string);
+    }
+
+    // Listen for language changes
+    const languageObserver = () => {
+      const newLang = yLanguage.get('current');
+      if (newLang !== language) {
+        setLanguage(newLang as string);
+        // Only set the template value if there's no existing content
+        if (!editorRef.current || editorRef.current.getValue().trim() === '') {
+          setValue(LANGUAGE_TEMPLATES[newLang as string] || '');
+        }
+      }
+    };
+    const outputObserver = () => {
+      setOutput(yOutput.get('current') as string);
+    };
+
+    yLanguage.observe(languageObserver);
+    yOutput.observe(outputObserver);
+
+    return () => {
+      yLanguage.unobserve(languageObserver);
+      yOutput.unobserve(outputObserver);
+    };
+  }, [provider, language, setOutput]);
+
   const handleMount = (editor: any, monaco: any) => {
     editorRef.current = editor;
     const ydoc = provider.doc;
@@ -57,14 +101,33 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ darkMode, editorRef, roomName, 
   };
 
   const handleLanguageChange = (newLanguage: string) => {
+    if (!provider) return;
+    
+    const ydoc = provider.doc;
+    const yLanguage = ydoc.getMap('language');
+    
+    // Update language in the shared document
+    yLanguage.set('current', newLanguage);
     setLanguage(newLanguage);
-    setValue(LANGUAGE_TEMPLATES[newLanguage]);
+    
+    // Only set template if editor is empty
+    if (!editorRef.current || editorRef.current.getValue().trim() === '') {
+      setValue(LANGUAGE_TEMPLATES[newLanguage]);
+    }
+  };
+
+  const updateSharedOutput = (output: string) => {
+    if (!provider) return;
+    
+    const ydoc = provider.doc;
+    const yOutput = ydoc.getMap('output');
+    yOutput.set('current', output);
   };
 
   return (
     <div>
       <div className="card shadow-sm">
-        <LanguageSelector editorRef={editorRef} language={language} onSelect={handleLanguageChange} setOutput={setOutput} />
+        <LanguageSelector editorRef={editorRef} language={language} onSelect={handleLanguageChange} setOutput={setOutput} updateSharedOutput={updateSharedOutput}/>
         <div className="card-body custom-panel">
           <Editor
             height="70vh"

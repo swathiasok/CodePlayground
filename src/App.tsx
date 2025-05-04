@@ -21,7 +21,8 @@ function App() {
     event.preventDefault();
     const room = isNewRoom ? Math.floor(10000 + Math.random() * 90000).toString() : roomName;
     addUserToRoom(room, name);
-  
+    console.log(`Room: ${room}, Name: ${name}`);
+    
     navigate('/home', { state: { room, name } });
   };
 

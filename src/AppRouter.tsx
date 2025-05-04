@@ -5,7 +5,7 @@ import Home from "./Home";
 
 const AppRouter = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/home" element={<Home />} />
