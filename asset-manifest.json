@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CodePlayground/static/css/main.ec1dcd6e.css",
-    "main.js": "/CodePlayground/static/js/main.9a2e5d06.js",
+    "main.js": "/CodePlayground/static/js/main.21819758.js",
     "static/js/614.20c3ab09.chunk.js": "/CodePlayground/static/js/614.20c3ab09.chunk.js",
     "static/js/320.15e6d70d.chunk.js": "/CodePlayground/static/js/320.15e6d70d.chunk.js",
     "static/js/351.89c59bec.chunk.js": "/CodePlayground/static/js/351.89c59bec.chunk.js",
@@ -11,7 +11,7 @@
     "static/js/453.68693753.chunk.js": "/CodePlayground/static/js/453.68693753.chunk.js",
     "index.html": "/CodePlayground/index.html",
     "main.ec1dcd6e.css.map": "/CodePlayground/static/css/main.ec1dcd6e.css.map",
-    "main.9a2e5d06.js.map": "/CodePlayground/static/js/main.9a2e5d06.js.map",
+    "main.21819758.js.map": "/CodePlayground/static/js/main.21819758.js.map",
     "614.20c3ab09.chunk.js.map": "/CodePlayground/static/js/614.20c3ab09.chunk.js.map",
     "320.15e6d70d.chunk.js.map": "/CodePlayground/static/js/320.15e6d70d.chunk.js.map",
     "351.89c59bec.chunk.js.map": "/CodePlayground/static/js/351.89c59bec.chunk.js.map",
@@ -21,6 +21,6 @@
   },
   "entrypoints": [
     "static/css/main.ec1dcd6e.css",
-    "static/js/main.9a2e5d06.js"
+    "static/js/main.21819758.js"
   ]
 }
